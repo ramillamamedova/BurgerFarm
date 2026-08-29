@@ -7,13 +7,12 @@
 
 import SwiftUI
 
-
 enum MenuCategory: String, CaseIterable, Identifiable {
     case burgers = "Burgers"
-    case philly = "Philly"
-    case fries = "Fries"
     case hotDogs = "Hot Dogs"
+    case fries = "Fries"
     case sides = "Sides"
+    case sauces = "Sauces"
     case drinks = "Drinks"
 
     var id: String { rawValue }
@@ -24,51 +23,60 @@ struct MenuItem: Identifiable {
     let name: String
     let price: String
     let category: MenuCategory
+    let imageName: String?
 }
 
 struct ContentView: View {
     @State private var selectedCategory: MenuCategory = .burgers
 
     let menu = [
-        MenuItem(name: "Classic Smashed", price: "10", category: .burgers),
-        MenuItem(name: "Smashed Cheese", price: "12.5", category: .burgers),
-        MenuItem(name: "Oklahoma Onion", price: "12.9", category: .burgers),
-        MenuItem(name: "Spicy Smashed", price: "12.9", category: .burgers),
-        MenuItem(name: "Jalapeno Smashed", price: "12.9", category: .burgers),
-        MenuItem(name: "Smashed Steak", price: "15", category: .burgers),
-        MenuItem(name: "BBQ Smashed", price: "12.9", category: .burgers),
-        MenuItem(name: "Fried Onion Smashed", price: "13.9", category: .burgers),
-        MenuItem(name: "Fresh Smashed", price: "12.9", category: .burgers),
-        MenuItem(name: "Truffle Smashed", price: "13.4", category: .burgers),
-        MenuItem(name: "Classic Smashed Chicken", price: "8", category: .burgers),
-        MenuItem(name: "Double Smashed Chicken", price: "9.9", category: .burgers),
-        MenuItem(name: "Sezar Smashed", price: "9.9", category: .burgers),
+        // BURGERS
+        MenuItem(name: "Classic Smashed", price: "10", category: .burgers, imageName: "ClassicSmashed"),
+        MenuItem(name: "Smashed Cheese", price: "12.5", category: .burgers, imageName: "SmashedCheese"),
+        MenuItem(name: "Oklahoma Onion", price: "12.9", category: .burgers, imageName: "OklahomaOnion"),
+        MenuItem(name: "Spicy Smashed", price: "12.9", category: .burgers, imageName: "SpicySmashed"),
+        MenuItem(name: "Jalapeno Smashed", price: "12.9", category: .burgers, imageName: "JalapenoSmashed"),
+        MenuItem(name: "Smash Deluxe", price: "15", category: .burgers, imageName: "SmashDeluxe"),
+        MenuItem(name: "BBQ Smashed", price: "12.9", category: .burgers, imageName: "BbqSmashed"),
+        MenuItem(name: "Fried Onion Smashed", price: "13.9", category: .burgers, imageName: "FriedOnionSmashed"),
+        MenuItem(name: "Fresh Smashed", price: "12.9", category: .burgers, imageName: "FreshSmashed"),
+        MenuItem(name: "Truffle Smashed", price: "13.4", category: .burgers, imageName: "TruffleSmashed"),
+        MenuItem(name: "Classic Smashed Chicken", price: "8", category: .burgers, imageName: "ClassicSmashedChicken"),
+        MenuItem(name: "Double Smash Chicken", price: "9.9", category: .burgers, imageName: "DoubleSmashChicken"),
+        MenuItem(name: "Sezar Smashed", price: "9.9", category: .burgers, imageName: "SezarSmashed"),
 
-        MenuItem(name: "Classic Philly Cheesesteak", price: "14.5", category: .philly),
-        MenuItem(name: "Jalapeno Philly Cheesesteak", price: "14.9", category: .philly),
-        MenuItem(name: "BBQ Philly Cheesesteak", price: "14.9", category: .philly),
+        // HOT DOGS
+        MenuItem(name: "American Hot Dog", price: "5.5", category: .hotDogs, imageName: nil),
+        MenuItem(name: "Jalapeno Hot Dog", price: "6", category: .hotDogs, imageName: nil),
+        MenuItem(name: "Farm Hot Dog", price: "6.5", category: .hotDogs, imageName: nil),
 
-        MenuItem(name: "Classic Philadelphia Fries", price: "14.5", category: .fries),
-        MenuItem(name: "Classic Chicken Philadelphia Fries", price: "11.5", category: .fries),
-        MenuItem(name: "BBQ Philadelphia Fries", price: "14.9", category: .fries),
-        MenuItem(name: "Jalapeno Philadelphia Fries", price: "15.5", category: .fries),
-        MenuItem(name: "Spicy Philadelphia Fries", price: "14.9", category: .fries),
-        MenuItem(name: "Sweet Chilli Philadelphia Fries", price: "14.9", category: .fries),
+        // FRIES
+        MenuItem(name: "Classic Philly Cheesesteak", price: "14.5", category: .fries, imageName: nil),
+        MenuItem(name: "Jalapeno Philly Cheesesteak", price: "14.9", category: .fries, imageName: nil),
+        MenuItem(name: "BBQ Philly Cheesesteak", price: "14.9", category: .fries, imageName: nil),
+        MenuItem(name: "Classic Philadelphia Fries", price: "14.5", category: .fries, imageName: nil),
+        MenuItem(name: "Classic Chicken Philadelphia Fries", price: "11.5", category: .fries, imageName: nil),
+        MenuItem(name: "BBQ Philadelphia Fries", price: "14.9", category: .fries, imageName: nil),
+        MenuItem(name: "Jalapeno Philadelphia Fries", price: "15.5", category: .fries, imageName: nil),
+        MenuItem(name: "Spicy Philadelphia Fries", price: "14.9", category: .fries, imageName: nil),
+        MenuItem(name: "Sweet Chilli Philadelphia Fries", price: "14.9", category: .fries, imageName: nil),
 
-        MenuItem(name: "American Hot Dog", price: "5.5", category: .hotDogs),
-        MenuItem(name: "Jalapeno Hot Dog", price: "6", category: .hotDogs),
-        MenuItem(name: "Farm Hot Dog", price: "6.5", category: .hotDogs),
+        // SIDES
+        MenuItem(name: "Kartof Fri", price: "3.5", category: .sides, imageName: nil),
+        MenuItem(name: "Kəndsayağı Kartof", price: "4", category: .sides, imageName: nil),
+        MenuItem(name: "Soğan Halqaları", price: "4.5", category: .sides, imageName: nil),
+        MenuItem(name: "Nuggets", price: "6", category: .sides, imageName: nil),
 
-        MenuItem(name: "Kartof Fri", price: "3.5", category: .sides),
-        MenuItem(name: "Kəndsayağı Kartof", price: "4", category: .sides),
-        MenuItem(name: "Soğan Halqaları", price: "4.5", category: .sides),
-        MenuItem(name: "Nuggets", price: "6", category: .sides),
+        // SAUCES
+        MenuItem(name: "BBQ Sauce", price: "1", category: .sauces, imageName: nil),
+        MenuItem(name: "Garlic Sauce", price: "1", category: .sauces, imageName: nil),
 
-        MenuItem(name: "Farm Lemonade", price: "4–5", category: .drinks),
-        MenuItem(name: "Farm Tea", price: "5", category: .drinks),
-        MenuItem(name: "Cola, Fanta, Sprite, Fuse Tea", price: "1.5–3", category: .drinks),
-        MenuItem(name: "Su / Qazlı", price: "1", category: .drinks),
-        MenuItem(name: "Ayran", price: "1", category: .drinks)
+        // DRINKS
+        MenuItem(name: "Farm Lemonade", price: "4–5", category: .drinks, imageName: nil),
+        MenuItem(name: "Farm Tea", price: "5", category: .drinks, imageName: nil),
+        MenuItem(name: "Cola, Fanta, Sprite, Fuse Tea", price: "1.5–3", category: .drinks, imageName: nil),
+        MenuItem(name: "Su / Qazlı", price: "1", category: .drinks, imageName: nil),
+        MenuItem(name: "Ayran", price: "1", category: .drinks, imageName: nil)
     ]
 
     var filteredMenu: [MenuItem] {
@@ -116,21 +124,38 @@ struct ContentView: View {
                 }
 
                 List(filteredMenu) { item in
-                    HStack {
-                        VStack(alignment: .leading, spacing: 5) {
+                    HStack(spacing: 14) {
+                        Group {
+                            if let imageName = item.imageName {
+                                Image(imageName)
+                                    .resizable()
+                                    .scaledToFill()
+                            } else {
+                                Image(systemName: "fork.knife")
+                                    .font(.title)
+                                    .foregroundStyle(.red)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .background(.red.opacity(0.1))
+                            }
+                        }
+                        .frame(width: 92, height: 92)
+                        .clipped()
+                        .clipShape(RoundedRectangle(cornerRadius: 14))
+
+                        VStack(alignment: .leading, spacing: 6) {
                             Text(item.name)
                                 .font(.headline)
 
-                            Text(selectedCategory.rawValue)
+                            Text(item.category.rawValue)
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
+
+                            Text("\(item.price) AZN")
+                                .font(.headline)
+                                .foregroundStyle(.red)
                         }
 
                         Spacer()
-
-                        Text("\(item.price) AZN")
-                            .font(.headline)
-                            .foregroundStyle(.red)
                     }
                     .padding(.vertical, 6)
                 }
