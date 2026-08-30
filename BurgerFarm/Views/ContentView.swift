@@ -21,7 +21,7 @@ struct ContentView: View {
                     Text("BURGER FARM")
                         .font(.largeTitle.bold())
 
-                    Text("Fresh smashed burgers")
+                    Text("Smashed since 2024")
                         .font(.subheadline)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
