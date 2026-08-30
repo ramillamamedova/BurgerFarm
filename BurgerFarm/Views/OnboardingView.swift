@@ -8,6 +8,7 @@ import SwiftUI
 
 struct OnboardingView: View {
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding: Bool = false
+    @AppStorage("selectedLanguage") private var selectedLanguage: String = "en"
     @State private var currentStep: Int = 1
 
     // Registration Form States
@@ -19,7 +20,6 @@ struct OnboardingView: View {
 
     var body: some View {
         ZStack {
-            // Yellow Brand Background
             Color(red: 1.0, green: 0.75, blue: 0.0)
                 .ignoresSafeArea()
 
@@ -36,6 +36,7 @@ struct OnboardingView: View {
                 }
             }
         }
+        .environment(\.locale, Locale(identifier: selectedLanguage))
     }
 
     // MARK: - Step 1: Welcome
@@ -43,7 +44,6 @@ struct OnboardingView: View {
         VStack(spacing: 0) {
             Spacer()
 
-            // Brand Logo Header
             VStack(spacing: 6) {
                 Text("BURGER FARM")
                     .font(.system(size: 38, weight: .black))
@@ -57,31 +57,23 @@ struct OnboardingView: View {
 
             Spacer()
 
-            // Glassmorphism Card
-            VStack(spacing: 16) {
-                Text("Welcome!")
+            VStack(spacing: 20) {
+                Text(LocalizedStringKey("Welcome!"))
                     .font(.title.bold())
                     .foregroundStyle(.black)
 
-                Text("Collect FarmCoins, discover new smashed burgers and get exclusive rewards.")
-                    .font(.subheadline)
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(.secondary)
-                    .padding(.horizontal)
-
                 // Language Selectors
-                HStack(spacing: 16) {
-                    Text("🇬🇧")
-                    Text("🇦🇿")
-                    Text("🇷🇺")
+                HStack(spacing: 12) {
+                    languageButton(flag: "🇬🇧", code: "en")
+                    languageButton(flag: "🇦🇿", code: "az")
+                    languageButton(flag: "🇷🇺", code: "ru")
                 }
-                .font(.title)
                 .padding(.vertical, 4)
 
                 Button(action: {
                     withAnimation { currentStep = 2 }
                 }) {
-                    Text("Continue")
+                    Text(LocalizedStringKey("Continue"))
                         .font(.headline)
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
@@ -97,17 +89,34 @@ struct OnboardingView: View {
         }
     }
 
+    private func languageButton(flag: String, code: String) -> some View {
+        Button(action: {
+            selectedLanguage = code
+        }) {
+            Text(flag)
+                .font(.title)
+                .padding(8)
+                .background(
+                    selectedLanguage == code
+                        ? Color.black.opacity(0.15)
+                        : Color.clear
+                )
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+    }
+
     // MARK: - Step 2: Registration
     private var registrationStep: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                // Back Button
                 Button(action: {
                     withAnimation { currentStep = 1 }
                 }) {
                     HStack(spacing: 4) {
                         Image(systemName: "chevron.left")
-                        Text("Back")
+                        Text(LocalizedStringKey("Back"))
                     }
                     .font(.headline)
                     .foregroundStyle(.black)
@@ -120,7 +129,7 @@ struct OnboardingView: View {
                         .font(.system(size: 26, weight: .black))
                         .italic()
                     
-                    Text("Registration")
+                    Text(LocalizedStringKey("Registration"))
                         .font(.subheadline)
                         .foregroundStyle(.black.opacity(0.7))
                 }
@@ -135,7 +144,7 @@ struct OnboardingView: View {
                     }
 
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Email Address")
+                        Text(LocalizedStringKey("Email Address"))
                             .font(.caption)
                             .foregroundStyle(.gray)
                         TextField("email@example.com", text: $email)
@@ -144,7 +153,7 @@ struct OnboardingView: View {
                     }
 
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("Gender")
+                        Text(LocalizedStringKey("Gender"))
                             .font(.caption)
                             .foregroundStyle(.gray)
 
@@ -160,7 +169,7 @@ struct OnboardingView: View {
                     }
 
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Date of Birth")
+                        Text(LocalizedStringKey("Date of Birth"))
                             .font(.caption)
                             .foregroundStyle(.gray)
                         TextField("DD.MM.YYYY", text: $birthDate)
@@ -170,7 +179,7 @@ struct OnboardingView: View {
                     Button(action: {
                         withAnimation { currentStep = 3 }
                     }) {
-                        Text("Register")
+                        Text(LocalizedStringKey("Register"))
                             .font(.headline)
                             .foregroundStyle(.white)
                             .frame(maxWidth: .infinity)
@@ -191,14 +200,13 @@ struct OnboardingView: View {
     // MARK: - Step 3: Notifications
     private var notificationsStep: some View {
         VStack {
-            // Back Button
             HStack {
                 Button(action: {
                     withAnimation { currentStep = 2 }
                 }) {
                     HStack(spacing: 4) {
                         Image(systemName: "chevron.left")
-                        Text("Back")
+                        Text(LocalizedStringKey("Back"))
                     }
                     .font(.headline)
                     .foregroundStyle(.black)
@@ -219,18 +227,13 @@ struct OnboardingView: View {
             Spacer()
 
             VStack(spacing: 16) {
-                Text("Get updates first!")
+                Text(LocalizedStringKey("Get updates first!"))
                     .font(.title2.bold())
-
-                Text("Enable push notifications to receive special offers and promo codes.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
 
                 Button(action: {
                     hasCompletedOnboarding = true
                 }) {
-                    Text("Enable Notifications")
+                    Text(LocalizedStringKey("Enable Notifications"))
                         .font(.headline)
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
@@ -239,11 +242,13 @@ struct OnboardingView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 14))
                 }
 
-                Button("Maybe Later") {
+                Button(action: {
                     hasCompletedOnboarding = true
+                }) {
+                    Text(LocalizedStringKey("Maybe Later"))
+                        .font(.subheadline)
+                        .foregroundStyle(.black)
                 }
-                .font(.subheadline)
-                .foregroundStyle(.black)
             }
             .padding(24)
             .background(.ultraThinMaterial)
@@ -253,7 +258,6 @@ struct OnboardingView: View {
     }
 }
 
-// MARK: - Helper Radio Button
 struct RadioButton: View {
     let title: String
     let isSelected: Bool
