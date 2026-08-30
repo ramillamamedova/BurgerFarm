@@ -158,11 +158,11 @@ struct OnboardingView: View {
                             .foregroundStyle(.gray)
 
                         HStack {
-                            RadioButton(title: "Male", isSelected: selectedGender == "Male") {
+                            RadioButton(title: LocalizedStringKey("Male"), isSelected: selectedGender == "Male") {
                                 selectedGender = "Male"
                             }
                             Spacer()
-                            RadioButton(title: "Female", isSelected: selectedGender == "Female") {
+                            RadioButton(title: LocalizedStringKey("Female"), isSelected: selectedGender == "Female") {
                                 selectedGender = "Female"
                             }
                         }
@@ -259,7 +259,7 @@ struct OnboardingView: View {
 }
 
 struct RadioButton: View {
-    let title: String
+    let title: LocalizedStringKey // <-- измени тип с String на LocalizedStringKey
     let isSelected: Bool
     let action: () -> Void
 

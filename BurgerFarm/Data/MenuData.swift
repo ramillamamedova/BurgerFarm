@@ -43,8 +43,8 @@ struct MenuData {
         // SIDES
         MenuItem(name: "French Fries", price: "4", category: .sides, imageName: "FrenchFries"),
         MenuItem(name: "Country Wedges", price: "4.5", category: .sides, imageName: "PotatoWedges"),
-        MenuItem(name: "Chicken Nuggets (6 pcs.)", price: "6", category: .sides, imageName: nil),
-        MenuItem(name: "Onion Rings (6 pcs.)", price: "5", category: .sides, imageName: nil),
+        MenuItem(name: "Chicken Nuggets (6 pcs.)", price: "6", category: .sides, imageName: "ChickenNuggets"),
+        MenuItem(name: "Onion Rings (6 pcs.)", price: "5", category: .sides, imageName: "OnionRings"),
 
         // SAUCES
         MenuItem(name: "Ketchup", price: "0.8", category: .sauces, imageName: "Ketchup"),
