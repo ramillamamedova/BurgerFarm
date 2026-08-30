@@ -47,30 +47,30 @@ struct MenuData {
 
         // HOT DOGS
         MenuItem(name: "American Hot Dog", price: "5.5", category: .hotDogs, imageName: "AmericanHotDog"),
-        MenuItem(name: "Jalapeno Hot Dog", price: "6", category: .hotDogs, imageName: "JalapenoHotDog"),
+        MenuItem(name: "Jalapeno Hot Dog", price: "6", category: .hotDogs, imageName: "SpicyHotDog"),
         MenuItem(name: "Farm Hot Dog", price: "6.5", category: .hotDogs, imageName: "FarmHotDog"),
 
         // FRIES
-        MenuItem(name: "Classic Philly Cheesesteak", price: "14.5", category: .fries, imageName: "ClassicPhilly"),
-        MenuItem(name: "Jalapeno Philly Cheesesteak", price: "14.9", category: .fries, imageName: "JalapenoPhilly"),
-        MenuItem(name: "BBQ Philly Cheesesteak", price: "14.9", category: .fries, imageName: "BbqPhilly"),
-        MenuItem(name: "Classic Philadelphia Fries", price: "14.5", category: .fries, imageName: "ClassicPhillyFries"),
-        MenuItem(name: "Classic Chicken Philadelphia Fries", price: "11.5", category: .fries, imageName: "ChickenPhillyFries"),
-        MenuItem(name: "BBQ Philadelphia Fries", price: "14.9", category: .fries, imageName: "BbqPhillyFries"),
-        MenuItem(name: "Jalapeno Philadelphia Fries", price: "15.5", category: .fries, imageName: "JalapenoPhillyFries"),
-        MenuItem(name: "Spicy Philadelphia Fries", price: "14.9", category: .fries, imageName: "SpicyPhillyFries"),
-        MenuItem(name: "Sweet Chilli Philadelphia Fries", price: "14.9", category: .fries, imageName: "SweetChilliPhillyFries"),
+        MenuItem(name: "Classic Philly Cheesesteak", price: "14.5", category: .fries, imageName: "ClassicPhiladelphiaFries"),
+        MenuItem(name: "Jalapeno Philly Cheesesteak", price: "14.9", category: .fries, imageName: "JalapenoPhiladelphiaFries"),
+        MenuItem(name: "BBQ Philly Cheesesteak", price: "14.9", category: .fries, imageName: "BBQPhiladelphiaFries"),
+        MenuItem(name: "Classic Philadelphia Fries", price: "14.5", category: .fries, imageName: "ClassicPhiladelphiaFries"),
+        MenuItem(name: "Classic Chicken Philadelphia Fries", price: "11.5", category: .fries, imageName: "ClassicChickenPhiladelphiaFries"),
+        MenuItem(name: "BBQ Philadelphia Fries", price: "14.9", category: .fries, imageName: "BBQPhiladelphiaFries"),
+        MenuItem(name: "Jalapeno Philadelphia Fries", price: "15.5", category: .fries, imageName: "JalapenoPhiladelphiaFries"),
+        MenuItem(name: "Spicy Philadelphia Fries", price: "14.9", category: .fries, imageName: "SpicyPhiladelphiaFries"),
+        MenuItem(name: "Sweet Chilli Philadelphia Fries", price: "14.9", category: .fries, imageName: "SweetChilliPhiladelphiaFries"),
 
         // SIDES
         MenuItem(name: "French Fries", price: "4", category: .sides, imageName: "FrenchFries"),
-        MenuItem(name: "Country Wedges", price: "4.5", category: .sides, imageName: "CountryWedges"),
+        MenuItem(name: "Country Wedges", price: "4.5", category: .sides, imageName: "PotatoWedges"),
         MenuItem(name: "Chicken Nuggets (6 pcs.)", price: "6", category: .sides, imageName: nil),
         MenuItem(name: "Onion Rings (6 pcs.)", price: "5", category: .sides, imageName: nil),
 
         // SAUCES
         MenuItem(name: "Ketchup", price: "0.8", category: .sauces, imageName: "Ketchup"),
         MenuItem(name: "Mayonnaise", price: "0.8", category: .sauces, imageName: "Mayonnaise"),
-        MenuItem(name: "BBQ Sauce", price: "0.8", category: .sauces, imageName: "BbqSauce"),
+        MenuItem(name: "BBQ Sauce", price: "0.8", category: .sauces, imageName: "BBQSauce"),
         MenuItem(name: "Cheese Sauce", price: "0.8", category: .sauces, imageName: "CheeseSauce"),
         MenuItem(name: "Farm Sauce", price: "0.8", category: .sauces, imageName: "FarmSauce"),
         MenuItem(name: "Sriracha Sauce", price: "1", category: .sauces, imageName: "SrirachaSauce"),
@@ -79,17 +79,15 @@ struct MenuData {
         // DRINKS
         MenuItem(name: "Farm Lemonade", price: "4", category: .drinks, imageName: "FarmLemonade"),
         MenuItem(name: "Farm Tea", price: "5", category: .drinks, imageName: "FarmTea"),
-        MenuItem(name: "Coca-Cola (330ml)", price: "2", category: .drinks, imageName: "CocaCola"),
-        MenuItem(name: "Coca-Cola Zero (330ml)", price: "2", category: .drinks, imageName: "CocaColaZero"),
+        MenuItem(name: "Coca-Cola (330ml)", price: "2", category: .drinks, imageName: "Coca-Cola"),
+        MenuItem(name: "Coca-Cola Zero (330ml)", price: "2", category: .drinks, imageName: "Coca-Cola Zero"),
         MenuItem(name: "Fanta (330ml)", price: "2", category: .drinks, imageName: "Fanta"),
         MenuItem(name: "Sprite (330ml)", price: "2", category: .drinks, imageName: "Sprite"),
         MenuItem(name: "Fuse Tea", price: "2", category: .drinks, imageName: "FuseTea"),
-        MenuItem(name: "Still Water", price: "1", category: .drinks, imageName: "StillWater"),
-        MenuItem(name: "Sparkling Water", price: "1", category: .drinks, imageName: "SparklingWater"),
-        MenuItem(name: "Ayran", price: "1", category: .drinks, imageName: "Ayran")
+        MenuItem(name: "Still Water", price: "1", category: .drinks, imageName: "Bonaqua"),
+        MenuItem(name: "Ayran", price: "1", category: .drinks, imageName: nil)
     ]
 }
-
 // MARK: - Main View
 struct ContentView: View {
     @State private var selectedCategory: MenuCategory = .burgers
