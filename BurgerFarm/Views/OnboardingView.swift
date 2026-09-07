@@ -259,7 +259,7 @@ struct OnboardingView: View {
 }
 
 struct RadioButton: View {
-    let title: LocalizedStringKey // <-- измени тип с String на LocalizedStringKey
+    let title: LocalizedStringKey // <--мне нужно изменить тип с String на LocalizedStringKey
     let isSelected: Bool
     let action: () -> Void
 
