@@ -10,6 +10,7 @@ import SwiftUI
 struct BranchView: View {
     private let phoneURL = URL(string: "tel://+994518431716")!
     private let whatsappURL = URL(string: "https://api.whatsapp.com/send/?phone=994518431716&text&type=phone_number&app_absent=0")!
+    private let instagramURL = URL(string: "https://www.instagram.com/burgerfarm.az/?utm_source=ig_web_button_share_sheet")!
     private let mapURL = URL(string: "http://maps.apple.com/?address=87b,Bakixanov,Kucesi,Baku")!
 
     var body: some View {
@@ -55,7 +56,7 @@ struct BranchView: View {
             .background(Color.white.opacity(0.8))
             .cornerRadius(12)
             
-            HStack(spacing: 16) {
+            HStack(spacing: 12) {
                 Button(action: {
                     UIApplication.shared.open(phoneURL)
                 }) {
@@ -78,6 +79,22 @@ struct BranchView: View {
                     HStack {
                         Image(systemName: "message.fill")
                         Text("WhatsApp")
+                    }
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .background(Color.black)
+                    .foregroundColor(.white)
+                    .cornerRadius(12)
+                }
+                
+                Button(action: {
+                    UIApplication.shared.open(instagramURL)
+                }) {
+                    HStack {
+                        Image(systemName: "link.circle")
+                        Text("Instagram")
                     }
                     .font(.subheadline)
                     .fontWeight(.semibold)

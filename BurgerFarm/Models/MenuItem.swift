@@ -24,5 +24,5 @@ struct MenuItem: Identifiable {
     let price: String
     let category: MenuCategory
     let imageName: String?
-    let description: String // Поле для ингредиентов и описания
+    let description: String
 }

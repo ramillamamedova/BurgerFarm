@@ -4,7 +4,6 @@
 //
 //  Created by Ram on 31.08.26.
 //
-
 import SwiftUI
 
 struct ItemDetailView: View {
@@ -14,15 +13,14 @@ struct ItemDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                // Item Image
-                ZStack(alignment: .topLeading) {
-                    if let imageName = item.imageName, !imageName.isEmpty {
+                ZStack {
+                    if let imageName = item.imageName, !imageName.isEmpty, let _ = UIImage(named: imageName) {
                         Image(imageName)
                             .resizable()
                             .scaledToFit()
                             .frame(maxWidth: .infinity)
                     } else {
-                        Image(systemName: "fork.knife")
+                        Image(systemName: "cup.and.saucer.fill")
                             .font(.system(size: 60))
                             .foregroundStyle(.red)
                             .frame(maxWidth: .infinity)
@@ -32,7 +30,6 @@ struct ItemDetailView: View {
                 }
                 .clipShape(RoundedRectangle(cornerRadius: 20))
 
-                // Item Information
                 VStack(alignment: .leading, spacing: 12) {
                     HStack {
                         Text(item.name)
@@ -59,7 +56,7 @@ struct ItemDetailView: View {
                     Text("Ingredients & Description")
                         .font(.headline)
 
-                    Text("Juicy ingredients prepared according to the signature Burger Farm recipe. Served hot and fresh.")
+                    Text(item.description)
                         .font(.body)
                         .foregroundStyle(.secondary)
                 }
@@ -67,7 +64,6 @@ struct ItemDetailView: View {
 
                 Spacer(minLength: 30)
 
-                // Add to Cart Button
                 Button(action: {
                     dismiss()
                 }) {
@@ -88,6 +84,6 @@ struct ItemDetailView: View {
 
 #Preview {
     NavigationStack {
-        ItemDetailView(item: MenuData.items[0])
+        ItemDetailView(item: MenuData.items[30])
     }
 }

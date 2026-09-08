@@ -61,6 +61,9 @@ struct ContentView: View {
                         CategoryButton(title: "Sauces", isSelected: selectedCategory == "Sauces") {
                             selectedCategory = "Sauces"
                         }
+                        CategoryButton(title: "Drinks", isSelected: selectedCategory == "Drinks") {
+                            selectedCategory = "Drinks"
+                        }
                     }
                     .padding(.horizontal)
                     .padding(.vertical, 12)
@@ -79,23 +82,23 @@ struct ContentView: View {
             }
         }
     }
-}
-
-struct CategoryButton: View {
-    let title: String
-    let isSelected: Bool
-    let action: () -> Void
     
-    var body: some View {
-        Button(action: action) {
-            Text(title)
-                .font(.subheadline)
-                .fontWeight(.medium)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 8)
-                .background(isSelected ? Color(red: 0.85, green: 0.15, blue: 0.1) : Color(.systemGray6))
-                .foregroundColor(isSelected ? .white : .primary)
-                .cornerRadius(20)
+    struct CategoryButton: View {
+        let title: String
+        let isSelected: Bool
+        let action: () -> Void
+        
+        var body: some View {
+            Button(action: action) {
+                Text(title)
+                    .font(.subheadline)
+                    .fontWeight(.medium)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 8)
+                    .background(isSelected ? Color(red: 0.85, green: 0.15, blue: 0.1) : Color(.systemGray6))
+                    .foregroundColor(isSelected ? .white : .primary)
+                    .cornerRadius(20)
+            }
         }
     }
 }
