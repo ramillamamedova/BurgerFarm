@@ -56,7 +56,7 @@ struct ItemDetailView: View {
                     Text("Ingredients & Description")
                         .font(.headline)
 
-                    Text(item.description)
+                    Text(item.localizedDescription)
                         .font(.body)
                         .foregroundStyle(.secondary)
                 }
@@ -79,11 +79,5 @@ struct ItemDetailView: View {
             }
         }
         .navigationBarTitleDisplayMode(.inline)
-    }
-}
-
-#Preview {
-    NavigationStack {
-        ItemDetailView(item: MenuData.items[30])
     }
 }

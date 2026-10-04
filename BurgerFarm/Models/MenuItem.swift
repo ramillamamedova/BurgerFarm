@@ -24,5 +24,19 @@ struct MenuItem: Identifiable {
     let price: String
     let category: MenuCategory
     let imageName: String?
-    let description: String
+    let descriptionAz: String
+    let descriptionRu: String
+    let descriptionEn: String
+    
+   
+    var localizedDescription: String {
+        let languageCode = Locale.current.language.languageCode?.identifier ?? "en"
+        if languageCode == "ru" {
+            return descriptionRu
+        } else if languageCode == "az" {
+            return descriptionAz
+        } else {
+            return descriptionEn
+        }
+    }
 }

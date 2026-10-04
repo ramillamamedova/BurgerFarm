@@ -4,12 +4,11 @@
 //
 //  Created by Ram on 25.08.26.
 //
-
 import SwiftUI
 
 @main
 struct BurgerFarmApp: App {
-    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding: Bool = false
+    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
 
     var body: some Scene {
         WindowGroup {
