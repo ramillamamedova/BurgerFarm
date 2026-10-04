@@ -1,0 +1,11 @@
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+*.xcworkspace/*
+!*.xcworkspace/contents.xcworkspace
+!*.xcworkspace/xcshareddata/
+UserInterfaceState.xcuserstate
+.DS_Store
+*.xcuserstate
+*.xcuserstate
+*.xcuserstate

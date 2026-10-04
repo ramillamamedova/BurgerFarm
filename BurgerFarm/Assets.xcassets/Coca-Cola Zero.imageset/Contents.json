@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Coca-Cola Zero.jpg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
