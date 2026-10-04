@@ -9,6 +9,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var selectedCategory = "Burgers"
     @State private var showBranchSheet = false
+    @AppStorage("userFirstName") private var userFirstName = ""
     
     var filteredMenu: [MenuItem] {
         MenuData.items.filter { $0.category.rawValue == selectedCategory }
@@ -26,6 +27,10 @@ struct ContentView: View {
                             .font(.system(size: 13, weight: .semibold))
                             .textCase(.uppercase)
                             .opacity(0.8)
+                        if !userFirstName.isEmpty {
+                            Text("Hi, \(userFirstName)!")
+                                .font(.system(size: 13, weight: .semibold))
+                        }
                     }
                     
                     Spacer()
@@ -90,7 +95,7 @@ struct ContentView: View {
         
         var body: some View {
             Button(action: action) {
-                Text(title)
+                Text(LocalizedStringKey(title))
                     .font(.subheadline)
                     .fontWeight(.medium)
                     .padding(.horizontal, 16)

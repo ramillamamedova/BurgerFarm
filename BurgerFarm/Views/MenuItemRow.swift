@@ -33,7 +33,7 @@ struct MenuItemRow: View {
                 Text(item.name)
                     .font(.headline)
 
-                Text(item.category.rawValue)
+                Text(LocalizedStringKey(item.category.rawValue))
                     .font(.caption)
                     .foregroundStyle(.secondary)
 

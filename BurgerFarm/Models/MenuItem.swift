@@ -27,16 +27,12 @@ struct MenuItem: Identifiable {
     let descriptionAz: String
     let descriptionRu: String
     let descriptionEn: String
-    
-   
-    var localizedDescription: String {
-        let languageCode = Locale.current.language.languageCode?.identifier ?? "en"
-        if languageCode == "ru" {
-            return descriptionRu
-        } else if languageCode == "az" {
-            return descriptionAz
-        } else {
-            return descriptionEn
+
+    func localizedDescription(for locale: Locale) -> String {
+        switch locale.language.languageCode?.identifier {
+        case "ru": return descriptionRu
+        case "az": return descriptionAz
+        default:   return descriptionEn
         }
     }
 }

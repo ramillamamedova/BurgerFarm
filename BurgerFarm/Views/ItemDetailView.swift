@@ -9,6 +9,7 @@ import SwiftUI
 struct ItemDetailView: View {
     let item: MenuItem
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.locale) private var locale
 
     var body: some View {
         ScrollView {
@@ -42,7 +43,7 @@ struct ItemDetailView: View {
                             .foregroundStyle(.red)
                     }
 
-                    Text(item.category.rawValue)
+                    Text(LocalizedStringKey(item.category.rawValue))
                         .font(.subheadline)
                         .padding(.horizontal, 10)
                         .padding(.vertical, 4)
@@ -56,7 +57,7 @@ struct ItemDetailView: View {
                     Text("Ingredients & Description")
                         .font(.headline)
 
-                    Text(item.localizedDescription)
+                    Text(item.localizedDescription(for: locale))
                         .font(.body)
                         .foregroundStyle(.secondary)
                 }

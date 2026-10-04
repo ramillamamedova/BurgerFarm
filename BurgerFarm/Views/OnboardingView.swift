@@ -3,8 +3,9 @@
 //  BurgerFarm
 //
 //  Created by Ram on 31.08.26.
-//
+
 import SwiftUI
+import UserNotifications
 
 struct OnboardingView: View {
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding: Bool = false
@@ -17,6 +18,15 @@ struct OnboardingView: View {
     @State private var email: String = ""
     @State private var selectedGender: String = "Female"
     @State private var birthDate: String = ""
+    @State private var showNameError = false
+    @State private var showEmailError = false
+
+    // Saved profile (stored on the device)
+    @AppStorage("userFirstName") private var savedFirstName: String = ""
+    @AppStorage("userLastName") private var savedLastName: String = ""
+    @AppStorage("userEmail") private var savedEmail: String = ""
+    @AppStorage("userGender") private var savedGender: String = ""
+    @AppStorage("userBirthDate") private var savedBirthDate: String = ""
 
     var body: some View {
         ZStack {
@@ -36,7 +46,6 @@ struct OnboardingView: View {
                 }
             }
         }
-        .environment(\.locale, Locale(identifier: selectedLanguage))
     }
 
     // MARK: - Step 1: Welcome
@@ -143,6 +152,12 @@ struct OnboardingView: View {
                             .textFieldStyle(.roundedBorder)
                     }
 
+                    if showNameError {
+                        Text("Please enter your first name")
+                            .font(.caption)
+                            .foregroundStyle(.red)
+                    }
+
                     VStack(alignment: .leading, spacing: 4) {
                         Text(LocalizedStringKey("Email Address"))
                             .font(.caption)
@@ -150,6 +165,14 @@ struct OnboardingView: View {
                         TextField("email@example.com", text: $email)
                             .textFieldStyle(.roundedBorder)
                             .keyboardType(.emailAddress)
+                            .textInputAutocapitalization(.never)
+                            .autocorrectionDisabled()
+
+                        if showEmailError {
+                            Text("Please enter a valid email")
+                                .font(.caption)
+                                .foregroundStyle(.red)
+                        }
                     }
 
                     VStack(alignment: .leading, spacing: 6) {
@@ -176,9 +199,7 @@ struct OnboardingView: View {
                             .textFieldStyle(.roundedBorder)
                     }
 
-                    Button(action: {
-                        withAnimation { currentStep = 3 }
-                    }) {
+                    Button(action: register) {
                         Text(LocalizedStringKey("Register"))
                             .font(.headline)
                             .foregroundStyle(.white)
@@ -230,9 +251,7 @@ struct OnboardingView: View {
                 Text(LocalizedStringKey("Get updates first!"))
                     .font(.title2.bold())
 
-                Button(action: {
-                    hasCompletedOnboarding = true
-                }) {
+                Button(action: requestNotifications) {
                     Text(LocalizedStringKey("Enable Notifications"))
                         .font(.headline)
                         .foregroundStyle(.white)
@@ -258,8 +277,44 @@ struct OnboardingView: View {
     }
 }
 
+// MARK: - Actions
+extension OnboardingView {
+    private func register() {
+        let name = firstName.trimmingCharacters(in: .whitespaces)
+        let mail = email.trimmingCharacters(in: .whitespaces)
+
+        showNameError = name.isEmpty
+        showEmailError = !isValidEmail(mail)
+        guard !showNameError, !showEmailError else { return }
+
+        savedFirstName = name
+        savedLastName = lastName.trimmingCharacters(in: .whitespaces)
+        savedEmail = mail
+        savedGender = selectedGender
+        savedBirthDate = birthDate
+
+        withAnimation { currentStep = 3 }
+    }
+
+    private func isValidEmail(_ value: String) -> Bool {
+        let parts = value.split(separator: "@", omittingEmptySubsequences: false)
+        return parts.count == 2
+            && !parts[0].isEmpty
+            && parts[1].contains(".")
+            && !value.contains(" ")
+    }
+
+    private func requestNotifications() {
+        Task {
+            _ = try? await UNUserNotificationCenter.current()
+                .requestAuthorization(options: [.alert, .sound, .badge])
+            hasCompletedOnboarding = true
+        }
+    }
+}
+
 struct RadioButton: View {
-    let title: LocalizedStringKey // <--мне нужно изменить тип с String на LocalizedStringKey
+    let title: LocalizedStringKey
     let isSelected: Bool
     let action: () -> Void
 
