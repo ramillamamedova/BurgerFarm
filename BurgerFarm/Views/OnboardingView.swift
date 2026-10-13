@@ -17,7 +17,7 @@ struct OnboardingView: View {
     @State private var lastName: String = ""
     @State private var email: String = ""
     @State private var selectedGender: String = "Female"
-    @State private var birthDate: String = ""
+    @State private var birthDate: Date = Date() // Используем Date для DatePicker
     @State private var showNameError = false
     @State private var showEmailError = false
 
@@ -148,8 +148,13 @@ struct OnboardingView: View {
                     HStack(spacing: 12) {
                         TextField("First Name", text: $firstName)
                             .textFieldStyle(.roundedBorder)
+                            .autocorrectionDisabled()
+                            .textInputAutocapitalization(.words)
+
                         TextField("Last Name", text: $lastName)
                             .textFieldStyle(.roundedBorder)
+                            .autocorrectionDisabled()
+                            .textInputAutocapitalization(.words)
                     }
 
                     if showNameError {
@@ -191,12 +196,22 @@ struct OnboardingView: View {
                         }
                     }
 
+                    // Выбор даты через календарь
                     VStack(alignment: .leading, spacing: 4) {
                         Text(LocalizedStringKey("Date of Birth"))
                             .font(.caption)
                             .foregroundStyle(.gray)
-                        TextField("DD.MM.YYYY", text: $birthDate)
-                            .textFieldStyle(.roundedBorder)
+                        
+                        DatePicker(
+                            "",
+                            selection: $birthDate,
+                            in: ...Date(), // Не дает выбрать дату из будущего
+                            displayedComponents: [.date]
+                        )
+                        .datePickerStyle(.compact)
+                        .labelsHidden()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.vertical, 4)
                     }
 
                     Button(action: register) {
@@ -291,7 +306,11 @@ extension OnboardingView {
         savedLastName = lastName.trimmingCharacters(in: .whitespaces)
         savedEmail = mail
         savedGender = selectedGender
-        savedBirthDate = birthDate
+        
+        // Форматируем выбранную дату в строку "dd.MM.yyyy"
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        savedBirthDate = formatter.string(from: birthDate)
 
         withAnimation { currentStep = 3 }
     }
