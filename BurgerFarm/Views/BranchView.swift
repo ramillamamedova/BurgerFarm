@@ -13,13 +13,31 @@ struct BranchView: View {
     private let instagramURL = URL(string: "https://www.instagram.com/burgerfarm.az/?utm_source=ig_web_button_share_sheet")!
     private let mapURL = URL(string: "http://maps.apple.com/?address=87b,Bakixanov,Kucesi,Baku")!
 
+    // Состояние для открытия экрана настроек
+    @State private var showSettings = false
+
     var body: some View {
         VStack(spacing: 16) {
+            // Верхняя панель с названием и кнопкой настроек
             HStack {
                 Text("Burger Farm")
                     .font(.title2)
                     .fontWeight(.heavy)
                     .italic()
+                
+                Spacer()
+
+                // Кнопка настроек (шестеренка) для удаления аккаунта / просмотра профиля
+                Button(action: {
+                    showSettings = true
+                }) {
+                    Image(systemName: "gearshape.fill")
+                        .font(.title3)
+                        .foregroundColor(.black)
+                        .padding(8)
+                        .background(Color.white.opacity(0.5))
+                        .clipShape(Circle())
+                }
             }
             .foregroundColor(.black)
             
@@ -110,5 +128,9 @@ struct BranchView: View {
         .background(Color(red: 1.0, green: 0.83, blue: 0.0))
         .cornerRadius(20)
         .padding(.horizontal)
+        // Модальное окно с настройками и удалением аккаунта
+        .sheet(isPresented: $showSettings) {
+            SettingsView()
+        }
     }
 }
